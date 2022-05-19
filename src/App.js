@@ -11,12 +11,12 @@ const api = {
 
 function App() {
 
-  const [query, setQuery] = useState('');
+  const [lat, long, setQuery] = useState('');
   const [weather, setWeather] = useState({});
 
   const search = evt => {
-    if (evt.key === "Enter"){
-      fetch(`${api.base}weather?q=${query}&units=imperial&appid=${api.key}`)
+    if (evt.button === "Enter"){
+      fetch(`${api.base}weather?lat=${lat}&lon=${long}&units=imperial&appid=${api.key}`)
         .then(res => res.json())
         .then(result => {
           setWeather(result);
@@ -46,12 +46,19 @@ function App() {
         <div className='search-box'>
           <input
             type="text"
-            className='search-bar'
-            placeholder='Search...'
+            className='search-bar1'
+            placeholder='Latitude...'
             onChange={e => setQuery(e.target.value)}
-            value={query}
-            onKeyPress={search}
+            value={lat}
           />
+          <input
+            type="text"
+            className='search-bar2'
+            placeholder='Longitude...'
+            onChange={f => setQuery(f.target.value)}
+            value={long}
+          />
+          <button className='Button' onClick={search}>Enter</button>
         </div>
         <div className='location-box'>
           <div className='location'>
