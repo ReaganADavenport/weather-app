@@ -1,16 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import './App.css';
 
 
-
 const api = {
-  key: "37e14b00d41cff6e913152e3d1e91c53",
-  base: "https://api.openweathermap.org/data/3.0"
+  key: "d5b6f7817e359e9e2ba28dae84ba4e6e",
+  base: "https://api.openweathermap.org/data/2.5"
 }
 
 
 function App() {
+
+  const [query, setQuery] = useState('');
+  const [weather, setWeather] = useState({});
+
+  const search = evt => {
+    if (evt.key === "Enter"){
+      fetch(`${api.base}weather?q=${query}&units=imperial&appid=${api.key}`)
+        .then(res => res.json())
+        .then(result => {
+          setWeather(result);
+          setQuery('');
+          console.log(result);
+        });
+      }
+  }
+  
 
   const dateBuilder = (d) => {
     let months = ["January", "February", "March", "April", "May", "June", "July", "August",
@@ -33,6 +48,9 @@ function App() {
             type="text"
             className='search-bar'
             placeholder='Search...'
+            onChange={e => setQuery(e.target.value)}
+            value={query}
+            onKeyPress={search}
           />
         </div>
         <div className='location-box'>

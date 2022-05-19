@@ -25,12 +25,7 @@ body {
 }
 
 main {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(5px);
-  border: solid 2px transparent;
-  border-radius: 15px;
-  box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.3);
-  min-height: 95vh;
+  min-height: 100vh;
   overflow-x: hidden;
   padding: 25px;
 }
@@ -85,7 +80,14 @@ main {
 }
 
 .weather-box{
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  border: solid 2px transparent;
+  border-radius: 15px;
+  box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.3);
   text-align: center;
+  margin-top: 30px;
+  padding-bottom: 30px;
 }
 
 .weather-box .temp{
@@ -99,5 +101,13 @@ main {
   font-size: 102px;
   font-weight: 900;
 
-  text-shadow: 3px 6px rgba(50, 50, 50, 0.75);
+  text-shadow: 3px 6px rgba(50, 50, 70, 0.75);
+  text-align: center;
+}
+
+.weather-box .weather {
+  color: #FFF;
+  font-size: 48px;
+  font-weight: 700;
+  text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
 }
