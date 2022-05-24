@@ -1,22 +1,23 @@
+import { setSelectionRange } from '@testing-library/user-event/dist/utils';
 import React, { useState } from 'react'
 
 import './App.css';
 
 
 const api = {
-  key: "d5b6f7817e359e9e2ba28dae84ba4e6e",
-  base: "https://api.openweathermap.org/data/2.5"
+  key: "68bbe789f0044e9f8e2173410222405",
+  base: "https://api.weatherapi.com/v1/current.json?"
 }
 
 
 function App() {
 
-  const [lat, long, setQuery] = useState('');
+  const [query, setQuery] = useState('');
   const [weather, setWeather] = useState({});
 
   const search = evt => {
-    if (evt.button === "Enter"){
-      fetch(`${api.base}weather?lat=${lat}&lon=${long}&units=imperial&appid=${api.key}`)
+    if (evt.key === "Enter"){
+      fetch(`${api.base}key=${api.key}&q=${query}&aqi=yes`)
         .then(res => res.json())
         .then(result => {
           setWeather(result);
@@ -37,7 +38,7 @@ function App() {
     let month = months[d.getMonth()];
     let year = d.getFullYear();
 
-    return `${day} ${date} ${month} ${year}`
+    return `${day}, ${date} ${month}, ${year}`
   }
 
   return(
@@ -46,32 +47,25 @@ function App() {
         <div className='search-box'>
           <input
             type="text"
-            className='search-bar1'
-            placeholder='Latitude...'
+            className='search-bar'
+            placeholder='Search...'
             onChange={e => setQuery(e.target.value)}
-            value={lat}
+            value={query}
+            onKeyPress={search}
           />
-          <input
-            type="text"
-            className='search-bar2'
-            placeholder='Longitude...'
-            onChange={f => setQuery(f.target.value)}
-            value={long}
-          />
-          <button className='Button' onClick={search}>Enter</button>
         </div>
-        <div className='location-box'>
-          <div className='location'>
-            Atlanta, US
+        {(typeof weather != "undefined") ? (
+        <div>
+          <div className='location-box'>
+            <div className='location'>{weather.location.name}, {weather.location.country}</div>
+            <div className='date'>{dateBuilder(new Date())}</div>
           </div>
-          <div className='date'>{dateBuilder(new Date())}</div>
-        </div>
-        <div className='weather-box'>
-          <div className='temp'>
-            80˚f
+          <div className='weather-box'>
+            <div className='temp'>{weather.current.temp_f}˚F</div>
+            <div className='weather'>{weather.current.condition.text}</div>
           </div>
-          <div className='weather'>Sunny</div>
         </div>
+        ) : ("")}
       </main>
     </div>
 )
