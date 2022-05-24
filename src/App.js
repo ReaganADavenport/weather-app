@@ -42,7 +42,8 @@ function App() {
   }
 
   return(
-    <div className="App">
+    <div className={
+      (typeof weather != "undefined") ? ((weather.current.temp_f > 80) ? 'App-hot':'App') : 'App'}>
       <main>
         <div className='search-box'>
           <input
@@ -55,17 +56,17 @@ function App() {
           />
         </div>
         {(typeof weather != "undefined") ? (
-        <div>
-          <div className='location-box'>
-            <div className='location'>{weather.location.name}, {weather.location.country}</div>
-            <div className='date'>{dateBuilder(new Date())}</div>
-          </div>
-          <div className='weather-box'>
-            <div className='temp'>{weather.current.temp_f}˚F</div>
-            <div className='weather'>{weather.current.condition.text}</div>
-          </div>
-        </div>
-        ) : ("")}
+           <div>
+           <div className='location-box'>
+             <div className='location'>{weather.location.name}, {weather.location.country}</div>
+             <div className='date'>{dateBuilder(new Date())}</div>
+           </div>
+           <div className='weather-box'>
+             <div className='temp'>{weather.current.temp_f}˚F</div>
+             <div className='weather'>{weather.current.condition.text}</div>
+           </div>
+         </div>
+        ) : (<div></div>)}
       </main>
     </div>
 )

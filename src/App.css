@@ -9,18 +9,18 @@ body {
 }
 
 .App {
-  background-image: url('./Assets/mild-temp.png');
+  background-image: url('./Assets/cold-temp.png');
   background-size: cover;
   background-position: bottom;
   transition: 0.4 ease-out;
   min-height: 100vh;
 }
 
-.App.hot {
+.App-hot {
   background-image: url('./Assets/hot-temp.png');
 }
 
-.App.cold {
+.App-mild {
   background-image: url('./Assets/cold-temp.png');
 }
 
