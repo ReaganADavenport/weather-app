@@ -41,7 +41,10 @@ function App() {
       case "Partly cloudy":
         return icons[0]
         break;
-     case "Clear":
+      case "Sunny":
+        return icons[1]
+        break;
+      case "Clear":
         return icons[1]
         break;
       case "Light rain":
