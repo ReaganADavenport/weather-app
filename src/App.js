@@ -3,6 +3,13 @@ import React, { useState } from 'react'
 
 import './App.css';
 
+import cloudy from './Assets/cloudy.png';
+import partly from './Assets/partly-cloudy.png';
+import rain from './Assets/rainy.png';
+import snowy from './Assets/snowy.png';
+import stormy from './Assets/stormy.png';
+import sunny from './Assets/sunny.png';
+
 
 const api = {
   key: "68bbe789f0044e9f8e2173410222405",
@@ -25,6 +32,39 @@ function App() {
           console.log(result);
         });
       }
+  }
+
+  const icons = [partly, sunny, rain, cloudy, snowy, stormy];
+
+  const getIcon = (weather) => {
+    switch(weather){
+      case "Partly cloudy":
+        return icons[0]
+        break;
+     case "Clear":
+        return icons[1]
+        break;
+      case "Light rain":
+        return icons[2]
+        break;
+      case "Moderate rain":
+        return icons[2]
+        break;
+      case "Heavy rain":
+        return icons[2]
+          break; 
+      case "Overcast":
+        return icons[3]
+        break;
+      case "Snow":
+        return icons[4]
+        break;
+      case "Moderate or heavy rain with thunder":
+        return icons[5]
+        break;
+      default:
+        return icons[0]
+    }
   }
   
 
@@ -64,6 +104,9 @@ function App() {
            <div className='weather-box'>
              <div className='temp'>{weather.current.temp_f}˚F</div>
              <div className='weather'>{weather.current.condition.text}</div>
+             <div className='weather-icon'>
+               <img className='icon' src={getIcon(weather.current.condition.text)}></img>
+               </div>
            </div>
          </div>
         ) : (<div></div>)}
