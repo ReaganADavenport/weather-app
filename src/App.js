@@ -1,4 +1,3 @@
-import { setSelectionRange } from '@testing-library/user-event/dist/utils';
 import React, { useState } from 'react'
 
 import './App.css';
@@ -55,7 +54,10 @@ function App() {
         break;
       case "Heavy rain":
         return icons[2]
-          break; 
+          break;
+      case "Light rain shower":
+        return icons[2]
+        break;
       case "Overcast":
         return icons[3]
         break;
@@ -72,21 +74,21 @@ function App() {
   
 
   const dateBuilder = (d) => {
-    let months = ["January", "February", "March", "April", "May", "June", "July", "August",
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August",
       "September", "October", "November", "December"];
-    let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-    let day = days[d.getDay()];
-    let date = d.getDate();
-    let month = months[d.getMonth()];
-    let year = d.getFullYear();
+    const day = days[d.getDay()];
+    const date = d.getDate();
+    const month = months[d.getMonth()];
+    const year = d.getFullYear();
 
     return `${day}, ${date} ${month}, ${year}`
   }
 
   return(
     <div className={
-      (typeof weather.current !== "undefined") ? ((weather.current.temp_f > 75) ? 'App-hot':'App') : 'App'}>
+      (typeof weather.current !== "undefined") ? ((weather.current.temp_f > 75) ? 'App-hot':'App') : 'App-mild'}>
       <main>
         <div className='search-box'>
           <input
